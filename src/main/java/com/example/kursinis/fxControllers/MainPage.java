@@ -93,6 +93,6 @@ public class MainPage {
     }
 
     public void deleteUser() {
-        textarea.setText(CallEndpoints.callDeleteEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/delete/" + id.getText()));
+        textarea.setText(CallEndpoints.callDeleteEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/delete?id=" + id.getText()));
     }
 }
