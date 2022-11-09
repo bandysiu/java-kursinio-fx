@@ -6,18 +6,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.net.MalformedURLException;
-
 public class LoginPage {
 
     public TextField loginField;
     public PasswordField passwordField;
 
-    public void validateLogin() throws MalformedURLException {
+    public void validateLogin() {
 
         if(!loginField.getText().isBlank() || !passwordField.getText().isBlank()){
 
-            String response = CallEndpoints.callGetEndpoint("http://localhost:8080/api/v1/user/users?login=" + loginField.getText());
+            String response = CallEndpoints.callGetEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/users?login=" + loginField.getText());
 
             if (response.length() == 2){
                 FxUtils.alert(Alert.AlertType.ERROR, "Error", "Incorrect login or password", "Please check your credentials");

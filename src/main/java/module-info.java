@@ -7,6 +7,10 @@ module com.example.kursinis {
     requires spring.data.jpa;
     requires org.json;
     requires spring.context;
+    requires json.simple;
+    requires java.net.http;
+    requires com.google.gson;
+    requires spring.jcl;
 
     opens com.example.kursinis to javafx.fxml;
     exports com.example.kursinis;

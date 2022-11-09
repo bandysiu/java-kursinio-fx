@@ -1,46 +1,87 @@
 package com.example.kursinis.utilities;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
+import java.net.http.*;
 
 public class CallEndpoints {
-    public static String callGetEndpoint(String url) throws MalformedURLException {
-        URL endpointUrl = new URL(url);
-        try (InputStream input = endpointUrl.openStream()) {
-            InputStreamReader isr = new InputStreamReader(input);
-            BufferedReader reader = new BufferedReader(isr);
-            StringBuilder json = new StringBuilder();
-            int c;
-            while ((c = reader.read()) != -1) {
-                json.append((char) c);
-            }
-            return json.toString();
-        } catch (IOException e) {
+    public static String callGetEndpoint(String url) {
+
+        try {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .GET()
+                    .build();
+
+            var client = HttpClient.newHttpClient();
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return response.body();
+
+        } catch (IOException | URISyntaxException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void callPostEndpoint(String url, String body) throws IOException {
-        URL endpointUrl = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) endpointUrl.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
-        con.setDoOutput(true);
-        try(OutputStream os = con.getOutputStream()) {
-            byte[] input = body.getBytes("utf-8");
-            os.write(input, 0, input.length);
+    public static String callDeleteEndpoint(String url) {
+        try {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .DELETE()
+                    .build();
+            var client = HttpClient.newHttpClient();
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return String.valueOf(response.statusCode());
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
-        try(BufferedReader br = new BufferedReader(
-                new InputStreamReader(con.getInputStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
-            }
-            System.out.println(response.toString());
+
+        return "500";
+    }
+
+    public static String callPostEndpoint(String url, String body) {
+        try {
+            byte[] sampleData = body.getBytes();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .headers("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(sampleData))
+                    .build();
+
+            var client = HttpClient.newHttpClient();
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return String.valueOf(response.statusCode());
+
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    public static String callPutEndpoint(String url) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.noBody())
+                    .build();
+            var client = HttpClient.newHttpClient();
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return String.valueOf(response.statusCode());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "500";
     }
 }
