@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="595.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursinis.fxControllers.ForumPage">
+<AnchorPane prefHeight="595.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursinis.fxControllers.ForumPage">
     <TableView fx:id="forumTable" layoutX="14.0" layoutY="14.0" onMouseClicked="#rowClicked" prefHeight="200.0" prefWidth="234.0">
       <columns>
           <TableColumn fx:id="id" prefWidth="31.0" text="ID" />
@@ -49,7 +49,7 @@
             </VBox.margin>
         </Button>
     </VBox>
-    <TextArea fx:id="chatBox" layoutX="261.0" layoutY="14.0" prefHeight="432.0" prefWidth="326.0" />
+    <TextArea fx:id="chatBox" editable="false" layoutX="261.0" layoutY="14.0" prefHeight="432.0" prefWidth="326.0" />
     <TextField fx:id="messageSpace" layoutX="261.0" layoutY="453.0" prefHeight="50.0" prefWidth="326.0" />
     <Button layoutX="532.0" layoutY="509.0" mnemonicParsing="false" onAction="#submitComment" text="Submit" />
     <Button layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onAction="#goBack" prefHeight="50.0" prefWidth="50.0" text="Back" />

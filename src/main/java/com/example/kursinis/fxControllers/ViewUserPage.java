@@ -1,7 +1,7 @@
 package com.example.kursinis.fxControllers;
 
 import com.example.kursinis.ParcelApplication;
-import com.example.kursinis.model.User;
+import com.example.kursinis.model.DtoUser;
 import com.example.kursinis.utilities.CallEndpoints;
 import com.example.kursinis.utilities.FxUtils;
 import javafx.collections.ObservableList;
@@ -18,14 +18,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ViewUserPage implements Initializable {
-    public TableColumn<User, Integer> id;
-    public TableColumn<User, String> firstName;
-    public TableColumn<User, String> lastName;
-    public TableColumn<User, String> email;
-    public TableColumn<User, String> salary;
-    public TableColumn<User, String> position;
-    public TableColumn<User, String> statusColumn;
-    public TableView<User> userTable;
+    public TableColumn<DtoUser, Integer> id;
+    public TableColumn<DtoUser, String> firstName;
+    public TableColumn<DtoUser, String> lastName;
+    public TableColumn<DtoUser, String> email;
+    public TableColumn<DtoUser, String> salary;
+    public TableColumn<DtoUser, String> position;
+    public TableColumn<DtoUser, String> statusColumn;
+    public TableView<DtoUser> userTable;
     public TextField firstNameField;
     public TextField lastNameField;
     public TextField emailField;
@@ -43,12 +43,12 @@ public class ViewUserPage implements Initializable {
         position.setCellValueFactory(new PropertyValueFactory<>("position"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        userTable.getItems().setAll(User.getArray());
+        userTable.getItems().setAll(DtoUser.getArray());
     }
 
     @FXML
     public void rowClicked(MouseEvent event){
-        User clickedUser = userTable.getSelectionModel().getSelectedItem();
+        DtoUser clickedUser = userTable.getSelectionModel().getSelectedItem();
 
         if(clickedUser != null){
             idField.setText(String.valueOf(clickedUser.getId()));
@@ -74,10 +74,10 @@ public class ViewUserPage implements Initializable {
     }
 
     public void submit(ActionEvent actionEvent) {
-        ObservableList<User> currentUserTable = userTable.getItems();
+        ObservableList<DtoUser> currentUserTable = userTable.getItems();
         int currentUserId = Integer.parseInt(idField.getText());
 
-        for(User user : currentUserTable){
+        for(DtoUser user : currentUserTable){
             if(user.getId() == currentUserId){
                 user.setFirstName(firstNameField.getText());
                 user.setLastName(lastNameField.getText());
@@ -110,7 +110,7 @@ public class ViewUserPage implements Initializable {
     }
 
     public void delete(ActionEvent actionEvent) {
-        ObservableList<User> currentUserTable = userTable.getItems();
+        ObservableList<DtoUser> currentUserTable = userTable.getItems();
 
         CallEndpoints.Delete("http://localhost:8080/api/user/delete?id=" + Integer.parseInt(idField.getText()));
 

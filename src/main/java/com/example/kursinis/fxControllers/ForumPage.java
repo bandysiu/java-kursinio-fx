@@ -5,6 +5,9 @@ import com.example.kursinis.model.DtoForum;
 import com.example.kursinis.utilities.CallEndpoints;
 import com.example.kursinis.utilities.ChatReformat;
 import com.example.kursinis.utilities.FxUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -103,6 +106,8 @@ public class ForumPage implements Initializable {
 
             String commentResponse = CallEndpoints.Get("http://localhost:8080/api/comment/comments?forumId=" + idField.getText());
 
+
+
             ChatReformat.comment(commentResponse);
         }
     }
@@ -112,7 +117,7 @@ public class ForumPage implements Initializable {
         fillTable();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(ParcelApplication.class.getResource("forum-page.fxml"));
+        fxmlLoader.setLocation(ParcelApplication.class.getResource("forum-page-managers.fxml"));
     }
 
     public void fillTable(){

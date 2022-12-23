@@ -23,7 +23,7 @@ public class ManagerMainPage {
     }
 
     public void openForum(ActionEvent actionEvent) {
-        FxUtils.openFxPage("forum-page.fxml", redirect);
+        FxUtils.openFxPage("forum-page-managers.fxml", redirect);
     }
 
     public void openAccount(ActionEvent actionEvent) {

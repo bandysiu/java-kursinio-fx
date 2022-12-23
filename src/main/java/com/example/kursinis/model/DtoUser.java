@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class DtoUser {
     private Integer id;
     private String firstName;
     private String lastName;
@@ -23,7 +23,7 @@ public class User {
     private String status;
     private String login;
 
-    public User(JSONObject jsonObject) {
+    public DtoUser(JSONObject jsonObject) {
         this.id = (Integer) jsonObject.get("id");
         this.firstName = (String) jsonObject.get("firstName");
         this.lastName = (String) jsonObject.get("lastName");
@@ -34,14 +34,14 @@ public class User {
         this.login = (String) jsonObject.get("login");
     }
 
-    public static List<User> getArray() {
+    public static List<DtoUser> getArray() {
         return getArray(CallEndpoints.Get("http://localhost:8080/api/user/users"));
     }
-    public static List<User> getArray(String body) {
-        List<User> users = new ArrayList<>();
+    public static List<DtoUser> getArray(String body) {
+        List<DtoUser> users = new ArrayList<>();
         JSONArray responseArray = new JSONArray(body);
         for (int i=0;i<responseArray.length();i++){
-            users.add(new User(responseArray.getJSONObject(i)));
+            users.add(new DtoUser(responseArray.getJSONObject(i)));
         }
         return users;
     }
