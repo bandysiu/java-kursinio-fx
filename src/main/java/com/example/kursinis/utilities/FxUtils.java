@@ -29,6 +29,5 @@ public class FxUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

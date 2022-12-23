@@ -31,8 +31,8 @@ public class RegisterPage {
         } else if (!Objects.equals(password.getText(), repeatPassword.getText())) {
             FxUtils.alert(Alert.AlertType.WARNING, "Warning", "Passwords must match", "");
         } else {
-            String loginResponse = CallEndpoints.callGetEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/users?login=" + login.getText());
-            String emailResponse = CallEndpoints.callGetEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/users?email=" + email.getText());
+            String loginResponse = CallEndpoints.Get("http://localhost:8080/api/user/users?login=" + login.getText());
+            String emailResponse = CallEndpoints.Get("http://localhost:8080/api/user/users?email=" + email.getText());
 
             if (loginResponse.length() != 2) {
                 FxUtils.alert(Alert.AlertType.ERROR, "Error", "Login name already exists", "Please choose another login name");
@@ -48,7 +48,7 @@ public class RegisterPage {
                 json.put("login", login.getText());
                 json.put("password", password.getText());
 
-                CallEndpoints.callPostEndpoint("https://parceldelivery.herokuapp.com/api/v1/user/registration", json.toString());
+                CallEndpoints.Post("http://localhost:8080/api/user/registration", json.toString());
 
                 FxUtils.alert(Alert.AlertType.INFORMATION, "Success", "Registration complete", "You will now we redirected to main page");
                 FxUtils.openFxPage("main-page.fxml", login);

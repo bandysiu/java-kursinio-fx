@@ -17,4 +17,10 @@ module com.example.kursinis {
 
     opens com.example.kursinis.fxControllers to javafx.fxml;
     exports com.example.kursinis.fxControllers;
+
+    opens com.example.kursinis.model to javafx.fxml;
+    exports com.example.kursinis.model;
+
+    opens com.example.kursinis.utilities to javafx.fxml;
+    exports com.example.kursinis.utilities;
 }

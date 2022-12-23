@@ -5,7 +5,7 @@ import java.net.*;
 import java.net.http.*;
 
 public class CallEndpoints {
-    public static String callGetEndpoint(String url) {
+    public static String Get(String url) {
 
         try {
 
@@ -25,7 +25,7 @@ public class CallEndpoints {
         }
     }
 
-    public static String callDeleteEndpoint(String url) {
+    public static String Delete(String url) {
         try {
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -46,7 +46,7 @@ public class CallEndpoints {
         return "500";
     }
 
-    public static String callPostEndpoint(String url, String body) {
+    public static String Post(String url, String body) {
         try {
             byte[] sampleData = body.getBytes();
             HttpRequest request = HttpRequest.newBuilder()
@@ -66,12 +66,13 @@ public class CallEndpoints {
         }
     }
 
-    public static String callPutEndpoint(String url) {
+    public static String Put(String url, String body) {
         try {
+            byte[] sampleData = body.getBytes();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Content-Type", "application/json")
-                    .PUT(HttpRequest.BodyPublishers.noBody())
+                    .PUT(HttpRequest.BodyPublishers.ofByteArray(sampleData))
                     .build();
             var client = HttpClient.newHttpClient();
 

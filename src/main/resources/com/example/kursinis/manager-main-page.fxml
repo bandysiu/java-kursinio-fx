@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="455.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursinis.fxControllers.ManagerMainPage">
+   <children>
+      <Button layoutX="89.0" layoutY="49.0" mnemonicParsing="false" onAction="#openUsers" prefHeight="30.0" prefWidth="120.0" text="View users" />
+      <Button layoutX="89.0" layoutY="89.0" mnemonicParsing="false" onAction="#openVehicles" prefHeight="30.0" prefWidth="120.0" text="View vehicles" />
+      <Button layoutX="89.0" layoutY="130.0" mnemonicParsing="false" onAction="#openShipments" prefHeight="30.0" prefWidth="120.0" text="View shipments" />
+      <Button layoutX="89.0" layoutY="170.0" mnemonicParsing="false" onAction="#openCommissions" prefHeight="30.0" prefWidth="120.0" text="View commissions" />
+      <Button layoutX="89.0" layoutY="241.0" mnemonicParsing="false" onAction="#openForum" prefHeight="30.0" prefWidth="120.0" text="Open forum" />
+      <Button layoutX="59.0" layoutY="347.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="30.0" prefWidth="180.0" text="Change account information" />
+      <Button layoutX="89.0" layoutY="390.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="120.0" text="Log out" />
+      <TextField fx:id="redirect" layoutX="7.0" layoutY="14.0" />
+   </children>
+</AnchorPane>
